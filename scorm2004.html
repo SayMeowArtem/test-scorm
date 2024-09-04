@@ -1,23 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>SCORM 2004 Example</title>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-            crossorigin="anonymous"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+      integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+      crossorigin="anonymous"
+    ></script>
 
     <!-- Prettify -->
-    <link rel="stylesheet" href="https://cdn.rawgit.com/google/code-prettify/master/styles/desert.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.rawgit.com/google/code-prettify/master/styles/desert.css"
+    />
     <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
 
     <!-- Pretender for API Mocking -->
@@ -30,50 +41,102 @@
 
     <script src="https://cdn.jsdelivr.net/npm/scorm-again@latest/dist/scorm-again.js"></script>
 
-    <link href="styles.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet" />
     <script src="lms.js" type="application/javascript"></script>
     <script src="common.js" type="application/javascript"></script>
     <script type="text/javascript">
       const urlParams = new URLSearchParams(window.location.search);
       let settings = getSettingsFromParams(urlParams);
 
-      settings.lmsCommitUrl = '/scorm2004';
+      settings.lmsCommitUrl = "/scorm2004";
 
       window.API_1484_11 = new Scorm2004API(settings);
 
-      window.API_1484_11.on('SetValue.cmi.*', function(CMIElement, value) {
+      window.API_1484_11.on("SetValue.cmi.*", function (CMIElement, value) {
         API_1484_11.storeData(false);
-        $('#cmi').
-            html('window.API_1484_11.cmi = ' + JSON.stringify(API_1484_11.renderCommitCMI(true), null, 2)).
-            removeClass('prettyprinted');
+        $("#cmi")
+          .html(
+            "window.API_1484_11.cmi = " +
+              JSON.stringify(API_1484_11.renderCommitCMI(true), null, 2)
+          )
+          .removeClass("prettyprinted");
 
         PR.prettyPrint();
       });
 
-      window.API_1484_11.on('Initialize', function(CMIElement, value) {
-        window.API_1484_11.SetValue('cmi.learner_name', '@jcputney');
+      window.API_1484_11.on("Initialize", function (CMIElement, value) {
+        window.API_1484_11.SetValue("cmi.learner_name", "@jcputney");
       });
 
-      let dataFromLms = { // this data is passed from the LMS
+      let dataFromLms = {
         cmi: {
-          entry: 'ab-initio',
-          learner_id: '@jcputney',
-          learner_name: 'Jonathan Putney',
-          scaled_passing_score: 0.5
-        }
+          comments_from_learner: {},
+          comments_from_lms: {},
+          completion_status: "incomplete",
+          completion_threshold: "",
+          credit: "credit",
+          entry: "ab-initio",
+          exit: "suspend",
+          interactions: {
+            0: {
+              id: "Slide4_Q_qd0u1jydrevu-xw0z63jmylrr",
+              type: "choice",
+              objectives: {},
+              timestamp: "2024-09-04T08:19:58.0Z",
+              weighting: "10",
+              learner_response: "3___________________________________",
+              result: "correct",
+              latency: "PT0H0M10S",
+              description:
+                "Выберите вкус сигарет LD IMPULSE COMPACT JUNGLE (одиночный выбор)",
+              correct_responses: {
+                0: {
+                  pattern: "3___________________________________",
+                },
+              },
+            },
+          },
+          launch_data: "",
+          learner_id: "@jcputney",
+          learner_name: "Jonathan Putney",
+          learner_preference: {
+            audio_level: "1",
+            language: "",
+            delivery_speed: "1",
+            audio_captioning: "0",
+          },
+          location: "",
+          max_time_allowed: "",
+          mode: "normal",
+          objectives: {},
+          progress_measure: "1",
+          scaled_passing_score: 0.5,
+          score: {
+            scaled: "0",
+            raw: "0",
+            min: "0",
+            max: "100",
+          },
+          session_time: "PT0H1M34S",
+          success_status: "unknown",
+          suspend_data:
+            "N4IgJiBcCcAs0HYBMAaEAbKBmNA3KA2gAwoCMKqWAungBaE0gBqhJ5ljADlKOgIYBnAC5MAlgFMA7uLABldKLDjseCZIAiAVwBOfIaID2AOyjQcIAQqWyhe8QJ4gijgMYGAtp3TihMqEO1NcVUBUV8ISACgkLCZAAkAT05xbQUjAGsHSAIQWnQiAH0AVnEADmgANiQAIxAqAF80UlcPLx8/SMDgkFxRUPD/LpjwxOTU0Qysgga0JBbPbwHO6J6+2Iio7t7++KSUtMyGRpAsebalzeGOy5AAR01RAC8bO0dNKHIQWUcBbkhQW6EdgoHCwRhTYGgxgAc0czn+FkczQR+EgnwmHzQ7igJERaLQmHxIBccJ+OOOyNAWSIxzmCOpx1O9I+9WO7yJAnS5NmjlR6JMkFx2MFaGpBJxaBJCPhVO5IEpeJpPOZgsZZNVaFg6qVICK2uOFX1bIlFi5GpOvJNGJFIGFuLFGBNUtA2igIBAxptnLlWpRVoFQpNDsJuOdID+0099rNNNZxylpGOwpAvmEE1haCEUFg5lRoE0AhSBSMfHcykgIAAUsY9LQ+EYAAQABU0QiM4gSIDQBaL4ncfFEhPd3cL2kUboAAgArFycVvtztxtD3J4ASSMADMDI4hHs3dDdEoIKLbL43an9EYM+HBIWIhu+OhC2htD4+Olyw+n909L5PEIskTVk0EeAwPBeM8EQmJQAA97CBChGFA8DT3g7IjE0dB0BQDCsJmCwrHEAAVUQyzScQILQ0AZUVTMcQAOiIIhSCY1imNgBB4E4opSHMb4EWFWUKzcBZ2mPFMPkYtj2M4xBYB48wiJ3VgyEYPRCFALMbQjTTSPLXFoQARQ+ZAihzBA4FKUhSAqNAN1fcRHk/R9C3qGZNJNHSUz0k0jJMpAzKwCzYFKJBSAQOyHKcqAv1choGmOUQjgpbU6MFKSWOkogOK4+TeLQfjQEEvFiVaRY/DS0gpOknK5IUtAlIRLTiFUtB1OyDztI07yy184y0VM8zoFKUoiCKXF7PERznO/NzGk63EvP0XqbT8gaAqGkaiiQcxJummKXPEOaErQJLshOkA6SE3EtKIDKsuy2TuPyr5HGKrJStEgZKuqtjauexTlOyNg1Oaha0CWnzVv68KNqC6AzAqBBPj26LIFio73IkrqOp6/S0DW2HAosuAeNQEBUZmuK5sS5LgLuHhWSAAA==",
+          time_limit_action: "continue,no message",
+          total_time: "PT1M34S",
+        },
       };
-      if(urlParams.get('existing')) {
+      if (urlParams.get("existing")) {
         dataFromLms = _.merge(dataFromLms, EXISTING_SCORM2004);
       }
 
-      window.API_1484_11.loadFromJSON(dataFromLms, '');
+      window.API_1484_11.loadFromJSON(dataFromLms, "");
 
       var unloaded = false;
       function unloadHandler() {
         if (!unloaded && !API_1484_11.isTerminated()) {
-          API_1484_11.SetValue('cmi.exit', 'suspend'); //Set exit to whatever is needed
-          API_1484_11.Commit(''); //save all data that has already been set
-          API_1484_11.Terminate(''); //close the SCORM API connection properly
+          API_1484_11.SetValue("cmi.exit", "suspend"); //Set exit to whatever is needed
+          API_1484_11.Commit(""); //save all data that has already been set
+          API_1484_11.Terminate(""); //close the SCORM API connection properly
           unloaded = true;
           return false;
         }
@@ -83,24 +146,28 @@
       window.onbeforeunload = unloadHandler;
       window.onunload = unloadHandler;
 
-      $(document).ready(function() {
+      $(document).ready(function () {
         rewireLoggingToElement();
       });
     </script>
-</head>
-<body class="m-0 p-0">
-<div class="container-fluid h-100 m-0 p-0">
-    <div class="row no-gutters h-100 align-items-center">
+  </head>
+  <body class="m-0 p-0">
+    <div class="container-fluid h-100 m-0 p-0">
+      <div class="row no-gutters h-100 align-items-center">
         <div id="cmi_wrapper" class="col-3 h-100 m-0">
-            <div class="h-75">
-                <pre id="cmi" class="prettyprint h-100 p-2 lang-json mb-0"></pre>
-            </div>
-            <div id="log-container" class="h-25">
-                <pre id="log"></pre>
-            </div>
+          <div class="h-75">
+            <pre id="cmi" class="prettyprint h-100 p-2 lang-json mb-0"></pre>
+          </div>
+          <div id="log-container" class="h-25">
+            <pre id="log"></pre>
+          </div>
         </div>
-        <iframe class="col d-block h-100 border-0 m-0 p-0" style="background-color: aqua;" src="./scrom/res/index.html"></iframe>
+        <iframe
+          class="col d-block h-100 border-0 m-0 p-0"
+          style="background-color: aqua"
+          src="./scrom/res/index.html"
+        ></iframe>
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>
